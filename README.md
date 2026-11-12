@@ -17,3 +17,14 @@ NavBar
 /login => Login
 /connections => Connections
 /profile => Profile
+
+create login page
+install axios
+install cors middleware in BE with configurations:  
+ origin: "http://localhost:5173", (FE url)
+credentials: true,
+set withCredentials in login api call
+
+install redux toolkit
+configure store
+create slice for user
