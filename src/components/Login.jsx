@@ -8,6 +8,7 @@ import { BASE_URL } from "../utils/constants";
 const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Login = () => {
       dispatch(addUser(response.data.user));
       navigate("/");
     } catch (error) {
+      setError(error.response?.data || "An error occurred during login.");
       console.error("Error occurred while logging in:", error);
     }
   };
@@ -51,7 +53,7 @@ const Login = () => {
           className="input"
           placeholder="Password"
         />
-
+        {error && <p className="text-error mt-2">{error}</p>}
         <button className="btn btn-neutral mt-4" onClick={handleLogin}>
           Login
         </button>
