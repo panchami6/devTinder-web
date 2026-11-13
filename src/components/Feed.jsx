@@ -26,7 +26,7 @@ const Feed = () => {
 
   return (
     <div className="flex items-center justify-center h-screen gap-10">
-      {feed && feed.map((user) => <UserCard key={user.id} user={user} />)}
+      {feed && feed.map((user) => <UserCard key={user._id} user={user} />)}
     </div>
   );
 };
