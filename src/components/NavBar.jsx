@@ -20,9 +20,7 @@ const NavBar = () => {
     }
   };
 
-  const handleProfileClick = () => {
-    navigate("/profile");
-  };
+ 
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
@@ -56,13 +54,19 @@ const NavBar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a className="justify-between" onClick={handleProfileClick}>
+                <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a>Settings</a>
+                <Link to="/connections" className="justify-between">
+                  Connections
+                </Link>
+              </li>
+               <li>
+                <Link to="/requests" className="justify-between">
+                  Requests
+                </Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
