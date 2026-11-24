@@ -9,6 +9,9 @@ const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [isLoginForm, setIsLoginForm] = useState(true)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,11 +33,49 @@ const Login = () => {
       console.error("Error occurred while logging in:", error);
     }
   };
+
+   const handleSignup = async () => {
+    try {
+       await axios.post(
+        `${BASE_URL}/signup`,
+        {
+          firstName,
+          lastName,
+          emailId: emailId,
+          password: password,
+        },
+        { withCredentials: true },
+      );
+      setIsLoginForm(true)
+    } catch (error) {
+      setError(error.response?.data || "An error occurred during login.");
+      console.error("Error occurred while logging in:", error);
+    }
+  };
+
   return (
     <div className="flex justify-center mt-10">
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-        <legend className="fieldset-legend">Login</legend>
-
+        <legend className="fieldset-legend">{isLoginForm ? "Login": "Sign Up"}</legend>
+        {!isLoginForm &&
+        (<>
+         <label className="label">First Name</label>
+        <input
+          type="firstname"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          className="input"
+          placeholder="First name"
+        />
+         <label className="label">Last Name</label>
+        <input
+          type="lastname"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          className="input"
+          placeholder="Last name"
+        />
+        </>)}
         <label className="label">Email</label>
         <input
           type="email"
@@ -53,9 +94,10 @@ const Login = () => {
           placeholder="Password"
         />
         {error && <p className="text-error mt-2">{error}</p>}
-        <button className="btn btn-neutral mt-4" onClick={handleLogin}>
-          Login
+        <button className="btn btn-neutral mt-4" onClick={isLoginForm ? handleLogin: handleSignup}>
+          {isLoginForm ? "Login": "Sign Up"}
         </button>
+        <div>{isLoginForm ? "Don't have an account? " : "Already have an account? "}<button className="btn btn-link" onClick={() => setIsLoginForm(!isLoginForm)}> {isLoginForm ? "Sign Up" : "Login"}</button></div>
       </fieldset>
     </div>
   );

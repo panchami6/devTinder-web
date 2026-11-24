@@ -105,6 +105,7 @@ const EditProfile = ({ user }) => {
         </div>
         <UserCard
           user={{ firstName, lastName, photoUrl, age, gender, about }}
+          hideButtons
         />
       </div>
       {showToast && (

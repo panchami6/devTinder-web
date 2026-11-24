@@ -3,7 +3,7 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux"
 import { setFeed } from "../utils/feedSlice";
 
-const UserCard = ({ user, feed }) => {
+const UserCard = ({ user, feed, hideButtons }) => {
   const dispatch = useDispatch()
 
   const handleSendRequest = async (status, toUserId) => {
@@ -37,10 +37,10 @@ const UserCard = ({ user, feed }) => {
         </h2>
         <p>{user.age}</p>
         <p>{user.gender}</p>
-        <div className="card-actions justify-center">
+        {!hideButtons && <div className="card-actions justify-center">
           <button className="btn bg-gray-500" onClick={() => handleSendRequest("ignored", user._id)}>Ignore</button>
           <button className="btn btn-primary" onClick={() => handleSendRequest("interested", user._id)}>Send Request</button>
-        </div>
+        </div>}
       </div>
     </div>
   );
